@@ -4,18 +4,24 @@ import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/Signup";
+<<<<<<< HEAD
 import FurnitureMenu from "../components/FurnitureMenu";
 import LightingMenu from "../components/LightingMenu";
 import DecorMenu from "../components/DecorMenu";
 import TabletopMenu from "../components/TabletopMenu";
 import ArtMenu from "../components/ArtMenu";
 import LifestyleMenu from "../components/lifestylemenu";
+=======
+>>>>>>> c82fa65e5009701f9dabfd7ff6c78ef563fa84c5
 
 const Home = () => {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+<<<<<<< HEAD
   const [hovered, setHovered] = useState(null);
+=======
+>>>>>>> c82fa65e5009701f9dabfd7ff6c78ef563fa84c5
 
   const handleSignInContinue = (email) => {
     setUserEmail(email);
@@ -33,6 +39,7 @@ const Home = () => {
       <TopBar />
       <Navbar onSignInClick={() => setShowSignIn(true)} />
 
+<<<<<<< HEAD
       <div className="relative z-30">
         <div className="flex justify-center gap-10 py-4 border-b font-medium text-sm tracking-wider uppercase bg-white">
           <div
@@ -141,6 +148,18 @@ const Home = () => {
             <LifestyleMenu />
           </div>
         )}
+=======
+      <div className="flex justify-center gap-10 py-4 border-b font-medium text-sm tracking-wider uppercase">
+        <span>Furniture</span>
+        <span>Lighting</span>
+        <span>Décor</span>
+        <span>Tabletop</span>
+        <span>Art</span>
+        <span>Lifestyle</span>
+        <span>Inspiration</span>
+        <span>Magazine</span>
+        <span>Artisans</span>
+>>>>>>> c82fa65e5009701f9dabfd7ff6c78ef563fa84c5
       </div>
 
       <Hero />

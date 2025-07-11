@@ -33,118 +33,49 @@ const Home = () => {
       <TopBar />
       <Navbar onSignInClick={() => setShowSignIn(true)} />
 
-      <div className="relative z-30">
-        <div className="flex justify-center gap-10 py-4 border-b font-medium text-sm tracking-wider uppercase bg-white">
-          <div
-            onMouseEnter={() => setHovered('furniture')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="cursor-pointer">Furniture</span>
-          </div>
-
-          <div
-            onMouseEnter={() => setHovered('lighting')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="cursor-pointer">Lighting</span>
-          </div>
-
-          <div
-            onMouseEnter={() => setHovered('decor')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="cursor-pointer">Décor</span>
-          </div>
-
-          <div
-            onMouseEnter={() => setHovered('tabletop')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="cursor-pointer">Tabletop</span>
-          </div>
-
-          <div
-            onMouseEnter={() => setHovered('art')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="cursor-pointer">Art</span>
-          </div>
-
-          <div
-            onMouseEnter={() => setHovered('lifestyle')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <span className="cursor-pointer">Lifestyle</span>
-          </div>
+      {/* Sticky Category Bar */}
+      <div className="sticky top-0 z-30 bg-white shadow-sm">
+        <div className="flex justify-center gap-10 py-4 border-b font-medium text-sm tracking-wider uppercase relative">
+          {[
+            { label: 'Furniture', component: <FurnitureMenu />, key: 'furniture' },
+            { label: 'Lighting', component: <LightingMenu />, key: 'lighting' },
+            { label: 'Decor', component: <DecorMenu />, key: 'decor' },
+            { label: 'Tabletop', component: <TabletopMenu />, key: 'tabletop' },
+            { label: 'Art', component: <ArtMenu />, key: 'art' },
+            { label: 'Lifestyle', component: <LifestyleMenu />, key: 'lifestyle' },
+          ].map(({ label, component, key }) => (
+            <div
+              key={key}
+              className="relative"
+              onMouseEnter={() => setHovered(key)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <div className="cursor-pointer">{label}</div>
+              {hovered === key && (
+                <div
+                  className="absolute top-full left-0 w-screen bg-white shadow-md z-20"
+                  onMouseEnter={() => setHovered(key)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  {/* Centered wrapper */}
+                  <div className="mx-auto w-full max-w-[1800px] px-10">
+                    {component}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
 
           <span>Inspiration</span>
           <span>Magazine</span>
           <span>Artisans</span>
         </div>
-
-        {hovered === 'furniture' && (
-          <div
-            className="absolute top-full left-0 w-full z-20"
-            onMouseEnter={() => setHovered('furniture')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <FurnitureMenu />
-          </div>
-        )}
-
-        {hovered === 'lighting' && (
-          <div
-            className="absolute top-full left-0 w-full z-20"
-            onMouseEnter={() => setHovered('lighting')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <LightingMenu />
-          </div>
-        )}
-
-        {hovered === 'decor' && (
-          <div
-            className="absolute top-full left-0 w-full z-20"
-            onMouseEnter={() => setHovered('decor')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <DecorMenu />
-          </div>
-        )}
-
-        {hovered === 'tabletop' && (
-          <div
-            className="absolute top-full left-0 w-full z-20"
-            onMouseEnter={() => setHovered('tabletop')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <TabletopMenu />
-          </div>
-        )}
-
-        {hovered === 'art' && (
-          <div
-            className="absolute top-full left-0 w-full z-20"
-            onMouseEnter={() => setHovered('art')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <ArtMenu />
-          </div>
-        )}
-
-        {hovered === 'lifestyle' && (
-          <div
-            className="absolute top-full left-0 w-full z-20"
-            onMouseEnter={() => setHovered('lifestyle')}
-            onMouseLeave={() => setHovered(null)}
-          >
-            <LifestyleMenu />
-          </div>
-        )}
       </div>
 
+      {/* Main Section */}
       <Hero />
 
+      {/* Modals */}
       {showSignIn && <SignIn onClose={closeAllModals} onContinue={handleSignInContinue} />}
       {showSignUp && <SignUp email={userEmail} onBack={closeAllModals} />}
     </div>

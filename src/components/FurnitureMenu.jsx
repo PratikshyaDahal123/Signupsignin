@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FurnitureMenu = () => {
   return (
@@ -6,7 +7,12 @@ const FurnitureMenu = () => {
       <div className="grid grid-cols-4 gap-16 text-gray-800 max-w-screen-xl mx-auto">
         {/* SEATING */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">SEATING</h3>
+          <Link
+            to="/furniture/seating"
+            className="text-lg font-semibold mb-4 inline-block hover:underline text-black"
+          >
+            SEATING
+          </Link>
           <ul className="space-y-2 text-sm">
             <li>Armchairs</li>
             <li>Bar Stools</li>

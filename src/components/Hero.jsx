@@ -1,7 +1,19 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { Heart, FileText } from 'lucide-react';
 
 const Hero = () => {
+  const [touchedIconIndex, setTouchedIconIndex] = useState(null);
+  const [tooltipType, setTooltipType] = useState(null);
+
+  const handleIconTouch = (index, type) => {
+    setTouchedIconIndex(index);
+    setTooltipType(type);
+    setTimeout(() => {
+      setTouchedIconIndex(null);
+      setTooltipType(null);
+    }, 2000); // Hide after 2 seconds
+  };
+
   const products = [
     {
       img: 'https://assets.wfcdn.com/im/23454794/resize-h600-w600%5Ecompr-r85/2332/233282997/Handmade+Ceramic+Decorative+Plate+1.jpg',
@@ -9,7 +21,6 @@ const Hero = () => {
       price: 'USD 2,600',
       shipping: 'Ships in 1–2 weeks',
     },
-    
     {
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkBKfnU7zC_sAjzvQqkiaTFGpkz8U0aIWjGVJabE8UFqE7EsqEcG0v0wmSPJS_4gk6ZQ0&usqp=CAU',
       title: 'PIANETA CERAMIC VASE',
@@ -23,49 +34,41 @@ const Hero = () => {
       shipping: 'Ships in 1 week',
     },
     {
-      
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRT4gCtXllAM8UHqRvDpaXBxfjhzhSeroRlUHXnn15hZW3535uEqC24pdwB_IZjXBQZQhY&usqp=CAU',
       title: 'VELVET BICOLOR HIGH VASE',
       price: 'USD 1,780',
       shipping: 'Ships in 2–3 weeks',
     },
-
     {
       img: 'https://armeniakos.gr/wp-content/uploads/2024/06/planet-3.png',
       title: 'JUPITER PLANET HIGH COFFEE TABLE',
       price: 'USD 1,780',
       shipping: 'Ships in 2–3 weeks',
     },
-
     {
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyjYQdhjG1xTe8zJLQWiSQuk7-JGV3sG_fyQ&s',
       title: 'TRE ANSE CERAMIC TEAPOT',
       price: 'USD 1,780',
       shipping: 'Ships in 2–3 weeks',
     },
-
     {
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSDY2yBWumg69NYVh9eI_W8ONwUFE63wAK1tGFX6a2oPBXjvyN505UWknebjRKtKn3nPQ&usqp=CAU',
       title: 'iRON FLOWERS CHANDELIER',
       price: 'USD 1,780',
       shipping: 'Ships in 2–3 weeks',
     },
-
     {
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxDzTdNgSGEnjO9oqZqZ-zCKqwVF_jEYLo9pWObJHckZEOXd-vprIClatZJmFVCBRO58o&usqp=CAU',
       title: 'WALL WALLPAPER',
       price: 'USD 1,780',
       shipping: 'Ships in 2–3 weeks',
     },
-
     {
       img: 'https://i.pinimg.com/236x/f3/51/10/f3511025317b6a80387517512a64fc5a.jpg',
       title: 'ABSTRACT CERAMICS',
       price: 'USD 1,780',
       shipping: 'Ships in 2–3 weeks',
     },
-
-    
   ];
 
   return (
@@ -88,27 +91,56 @@ const Hero = () => {
       {/* Description Section */}
       <div className="max-w-4xl mx-auto px-6 py-12 text-center">
         <p className="text-lg text-gray-900 leading-8 font-light">
-          <strong>Decor</strong> is more than a shopping destination, it's a journey into the soul of curated beauty and craftsmanship. Inspired by the elegance of timeless design and the warmth of inviting spaces, Decor brings you a handpicked collection of furniture, lighting, and artistic decor pieces. Each item tells a story of tradition, innovation, and the quiet luxury of thoughtful living.
-          <br /><br />
-          Decor invites you to wander through our digital rooms, explore unique styles, and find pieces that resonate with your vision. Whether you're furnishing a cozy corner or transforming your entire home, our platform makes it simple to fall in love with a piece, <strong>add it to your cart</strong>, and bring it home. You can even personalize selections or contribute your own creative touch, making every space truly yours.
-          <br /><br />
-          Let Decor be your guide to the art of beautiful living where every purchase is a step into a world of elegance, comfort, and individuality.
+          <strong>Decor</strong> is more than a shopping destination, it's a journey into the soul of curated beauty and craftsmanship...
         </p>
-
         <h2 className="text-3xl md:text-4xl font-semibold text-black mt-10">
           Discover Crafts & Design
         </h2>
       </div>
 
-      {/* Product Showcase Section */}
+      {/* Product Showcase */}
       <div className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
         {products.map((product, index) => (
-          <div key={index} className="bg-white shadow-md rounded-lg overflow-hidden">
-            <img
-              src={product.img}
-              alt={product.title}
-              className="w-full h-64 object-cover"
-            />
+          <div key={index} className="bg-white shadow-md rounded-lg overflow-hidden relative group">
+            <div className="overflow-hidden relative">
+              <img
+                src={product.img}
+                alt={product.title}
+                className="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105"
+              />
+              {/* Icon Buttons */}
+              <div className="absolute top-2 right-2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* Heart Icon */}
+                <div className="relative">
+                  <Heart
+                    className="w-5 h-5 text-yellow-400 hover:text-red-500 cursor-pointer"
+                    onTouchStart={() => handleIconTouch(index, 'wishlist')}
+                  />
+                  <span
+                    className={`absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs bg-black text-white px-2 py-1 rounded z-10 whitespace-nowrap transition-opacity duration-200 ${
+                      (tooltipType === 'wishlist' && touchedIconIndex === index) ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    Add to wishlist
+                  </span>
+                </div>
+
+                {/* File Icon */}
+                <div className="relative">
+                  <FileText
+                    className="w-5 h-5 text-yellow-400 hover:text-yellow-500 cursor-pointer"
+                    onTouchStart={() => handleIconTouch(index, 'list')}
+                  />
+                  <span
+                    className={`absolute -top-8 left-1/2 transform -translate-x-1/2 text-xs bg-black text-white px-2 py-1 rounded z-10 whitespace-nowrap transition-opacity duration-200 ${
+                      (tooltipType === 'list' && touchedIconIndex === index) ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    Add to list
+                  </span>
+                </div>
+              </div>
+            </div>
             <div className="p-4">
               <h3 className="text-lg font-medium text-gray-900 mb-1">{product.title}</h3>
               <p className="text-sm text-gray-700">{product.price}</p>

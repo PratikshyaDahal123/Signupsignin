@@ -1,7 +1,7 @@
 import React from "react";
 import { X, Phone, Mail, Building2, Calendar } from "lucide-react";
 
-const ContactUs = ({ onClose }) => {
+const Contact = ({ onClose }) => {
   return (
     // Full screen overlay with very high z-index
     <div className="fixed inset-0 z-[1000] bg-black bg-opacity-40 flex justify-center items-center">
@@ -52,4 +52,4 @@ const ContactUs = ({ onClose }) => {
   );
 };
 
-export default ContactUs;
+export default Contact;

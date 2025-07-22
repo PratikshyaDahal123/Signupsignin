@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const TopBar = ({ onContactClick, onAboutClick }) => {
+const TopBar = () => {
   return (
     <div className="bg-black text-white text-sm px-4 py-2 flex justify-between">
       <div className="flex gap-4">
@@ -8,12 +9,12 @@ const TopBar = ({ onContactClick, onAboutClick }) => {
         <span>LANGUAGE: ENG</span>
       </div>
       <div className="flex gap-4">
-        <button onClick={onAboutClick} className="hover:underline">
+        <Link to="/about" className="hover:underline">
           ABOUT Decorish
-        </button>
-        <button onClick={onContactClick} className="hover:underline">
+        </Link>
+        <Link to="/contact" className="hover:underline">
           📞 CONTACT US
-        </button>
+        </Link>
       </div>
     </div>
   );

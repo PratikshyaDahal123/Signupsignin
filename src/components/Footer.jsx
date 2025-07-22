@@ -70,7 +70,7 @@ const Footer = () => {
             </button>
           </div>
           <p className="text-xs text-gray-400 mb-6">
-            I agree to the processing of my personal data to receive promotional messages about Artemest.{" "}
+            I agree to the processing of my personal data to receive promotional messages about Decor.{" "}
             <span className="underline text-[#c5a46d]">Read our privacy policy</span>
           </p>
 

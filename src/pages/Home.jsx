@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import SignIn from "../components/SignIn";
 import SignUp from "../components/Signup";
@@ -10,6 +9,8 @@ import TabletopMenu from "../components/TabletopMenu";
 import ArtMenu from "../components/ArtMenu";
 import LifestyleMenu from "../components/lifestylemenu";
 import Aboutdecorish from "../components/Aboutdecorish";
+import products from "../components/productdata";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [showSignIn, setShowSignIn] = useState(false);
@@ -32,8 +33,6 @@ const Home = () => {
 
   return (
     <div className={showSignIn || showSignUp || showAbout ? "overflow-hidden h-screen" : ""}>
-      <Navbar onSignInClick={() => setShowSignIn(true)} />
-
       {/* Sticky Category Bar */}
       <div className="sticky top-0 z-30 bg-white shadow-sm">
         <div className="flex justify-center gap-10 py-4 border-b font-medium text-sm tracking-wider uppercase relative">
@@ -74,6 +73,16 @@ const Home = () => {
       {showAbout && <Aboutdecorish onClose={() => setShowAbout(false)} />}
 
       <Hero />
+
+      {/* Products List */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+        {products.map((product) => (
+          <Link to={`/product/${product.id}`} key={product.id} className="text-center">
+            <img src={product.image} alt={product.title} className="w-full h-auto object-cover mb-2" />
+            <p className="text-sm font-medium">{product.title}</p>
+          </Link>
+        ))}
+      </div>
 
       {showSignIn && (
         <SignIn onClose={closeAllModals} onContinue={handleSignInContinue} />
